@@ -5,6 +5,10 @@ embed {
   height: 700px;
 }
 
+.sql-coment {
+  color: green;
+}
+
 pre {
     display: block;
     background-color: rgb(186, 186, 186);
@@ -20,10 +24,9 @@ pre {
 code {
     margin-left: 10px;
 }
+
 img {
   border-radius: 5px;
-  max-width: 100%;
-  border: 10px solid #0C0C0C;
 }
 
 p {

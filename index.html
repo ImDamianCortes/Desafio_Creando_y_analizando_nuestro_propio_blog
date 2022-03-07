@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Desafio - Creando y analizando nuestro propio Blog</title>
@@ -41,12 +41,12 @@
     </nav>
     <!-- Section Header -->
     <section class="container-fluid py-3 bg-dark text-white">
-        <h1 class="text-center">Desafío - Desafio - Creando y analizando nuestro propio Blog</h1>
-        <h5 class="text-center">Modulo 5</h5>
+        <h1 class="text-center">Desafio - Creando y analizando nuestro propio Blog</h1>
+        <h5 class="text-center mt-3 text-success">Modulo 5</h5>
     </section>
     <!-- Sectiom PDF DESAFIO -->
     <section class="container my-5">
-        <embed src="03_d_Desafío_-_Top_100_.pdf" type="" class="w-100">
+        <embed src="03_d_Desafío_-_Creando_y_analizando_nuestro_propio_blog.pdf" type="" class="w-75 d-block mx-auto">
     </section>
     <!-- Section Body -->
     <section class="container">
@@ -58,22 +58,16 @@
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        1. Crear base de datos llamada películas.
+                        1. Crear base de datos llamada blog.
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <p>Dentro de un motor de base de datos PostgreSQL, podemos tener varias bases de datos.Para crear una base de datos, usaremos el siguiente comando, el que nos permitirá alojar todas las tablas que se generen posteriormente:</p>
-                        <pre><code>CREATE DATABASE nombre_base_de_datos;</code></pre>
-                        <img src="assets/img/CREATE DATABASE.PNG" alt="create-database">
-                        <p>Una vez creada la base de datos se puede verificar que esta ha sido creada con el siguiente comando</p>
-                        <pre><code>\l</code></pre>
-                        <p>Obteniendo como resultado la lista de base de datos en la que encontramos la que previamente creamos, en este caso "peliculas"</p>
-                        <img src="assets/img/LISTADO DE BASE DE DATOS.PNG" alt="">
-                        <p>Posteriormente debemos acceder a la base de datos en la que queremos trabajar y para esto utilizamos la siguiente instruccion.</p>
-                        <pre><code>\c nombre_base_de_datos</code></pre>
-                        <img src="assets/img/ACCESO A BASE DE DATOS.PNG" alt="">
+                        <p class="sql-coment">-- creando base de datos</p>
+                        <pre><code>CREATE DATABASE blog;</code></pre>
+                        <p class="sql-coment">-- accediendo a la base de datos</p>
+                        <img src="assets/img/accediendo_a_basedatos_blog.PNG" alt="">
                     </div>
                 </div>
             </div>
@@ -83,30 +77,19 @@
                     <button class="accordion-button collapsed bg-dark text-white" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                         aria-controls="collapseTwo">
-                        2. Cargar ambos archivos a su tabla correspondiente.
+                        2. Crear las tablas indicadas de acuerdo al modelo de datos.
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <p>Una vez que creamos la base de datos y accedimos a ella, es necesario comenzar con la creacion de las tablas.</p>
-                        <p>Crear la tabla (peliculas).</p>
-                        <pre><code>CREATE TABLE peliculas(id int, pelicula varchar(60), ano_estreno varchar(4), director varchar(60), PRIMARY KEY(id));</code></pre>
-                        <img src="assets/img/CREATE TABLE PELICULAS.PNG" alt="">
-                        <p>Importar los datos desde archivo (peliculas.csv)</p>
-                        <pre><code>COPY peliculas FROM 'C:\Users\darkm\Desktop\Modulo 5\Desafio_Top_100\Apoyo DesafIo - Top 100\peliculas.csv' csv header;</code></pre>
-                        <img src="assets/img/IMPORT CSV PELICULAS.PNG" alt="">
-                        <p>Crear la tabla (reparto).</p>
-                        <pre><code>CREATE TABLE reparto(id int, reparto varchar(60), FOREIGN KEY (id) REFERENCES peliculas(id));</code></pre>
-                        <img src="assets/img/CREATE TABLE REPARTO.PNG" alt="">
-                        <p>Importar los datos desde archivo (reparto.csv)</p>
-                        <pre><code>COPY reparto FROM 'C:\Users\darkm\Desktop\Modulo 5\Desafio_Top_100\Apoyo DesafIo - Top 100\reparto.csv' csv header;</code></pre>
-                        <img src="assets/img/IMPORT CSV REPARTO.PNG" alt="">
-                        <p>Finalmente se puede comprobar que los archivos han sido cargados de forma correcta.</p>
-                        <pre><code>SELECT * FROM peliculas;</code></pre>
-                        <img src="assets/img/TABLE PELICULAS.PNG" alt="">
-                        <pre><code>SELECT * FROM reparto;</code></pre>
-                        <img src="assets/img/TABLE REPARTO.PNG" alt="">
+                        <img src="assets/img/modelo_de_datos.PNG" alt="">
+                        <p class="sql-coment">-- creando base de datos</p>
+                        <pre><code>CREATE TABLE usuario(<br class="br-code"> id INT,<br> email VARCHAR(50),<br> PRIMARY KEY (id));</code></pre>
+                        <p class="sql-coment">-- create table post</p>
+                        <pre><code>CREATE TABLE post(<br> id INT,usuario_id INT,<br> titulo VARCHAR(100),<br> fecha DATE,<br> PRIMARY KEY (id),<br> FOREIGN KEY (usuario_id) REFERENCES usuario(id));</code></pre>
+                        <p class="sql-coment">-- create table comentario</p>
+                        <pre><code>CREATE TABLE comentario(<br> id INT,<br> usuario_id INT,<br> post_id INT,<br> texto VARCHAR(100),<br> fecha DATE,<br> PRIMARY KEY (id),<br> FOREIGN KEY (post_id) REFERENCES post(id),<br> FOREIGN KEY (usuario_id) REFERENCES usuario(id));</code></pre>
                     </div>
                 </div>
             </div>
@@ -116,14 +99,25 @@
                     <button class="accordion-button collapsed bg-dark text-white" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
                         aria-controls="collapseThree">
-                        3. Obtener el ID de la película “Titanic”.
+                        3. Insertar los siguientes registros.
                     </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <pre><code>SELECT id FROM peliculas WHERE pelicula='Titanic';</code></pre>
-                        <img src="assets/img/ID PELICULA TITANIC.PNG" alt="">
+                        <p class="sql-coment">-- importar registros usuario</p>
+                        <pre><code>COPY usuario<br> FROM 'directorio\assets\registros\usuario.csv' csv header;</code></pre>
+                        <p class="sql-coment">-- importar registros post</p>
+                        <pre><code>COPY usuario<br> FROM 'directorio\assets\registros\post.csv' csv header;</code></pre>
+                        <p class="sql-coment">-- importar registros comentario</p>
+                        <pre><code>COPY usuario<br> FROM 'directorio\assets\registros\comentario.csv' csv header;</code></pre>
+                        <h2 class="mt-5 text-success">Verificar las tablas.</h2>
+                        <p class="sql-coment">-- vefificar usuario</p>
+                        <img src="assets/img/tabla_usuario.PNG" alt="">
+                        <p class="sql-coment">-- vefificar post</p>
+                        <img src="assets/img/tabla_post.PNG" alt="">
+                        <p class="sql-coment">-- vefificar comentario</p>
+                        <img src="assets/img/tabla_comentario.PNG" alt="">
                     </div>
                 </div>
             </div>
@@ -133,15 +127,13 @@
                     <button class="accordion-button collapsed bg-dark text-white" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
                         aria-controls="collapseFour">
-                        4.   Listar a todos los actores que aparecen en la película "Titanic".
+                        4. Seleccionar el correo, id y título de todos los post publicados por el usuario 5.
                     </button>
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <p>En este caso se utiliza una consulta anidada en la condicion</p>
-                        <pre><code>SELECT reparto FROM reparto WHERE id=(SELECT id FROM peliculas WHERE pelicula='Titanic');</code></pre>
-                        <img src="assets/img/REPARTO TITANIC.PNG" alt="">
+
                     </div>
                 </div>
             </div>
@@ -151,14 +143,14 @@
                     <button class="accordion-button collapsed bg-dark text-white" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
                         aria-controls="collapseFive">
-                        5.   Consultar en cuántas películas del top 100 participa Harrison Ford.
+                        5. Listar el correo, id y el detalle de todos los comentarios que no hayan sido realizados por
+                        el usuario con email usuario06@hotmail.com.
                     </button>
                 </h2>
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <pre><code>SELECT COUNT (id) AS total_participacion_t100_Harrison_Ford FROM reparto WHERE reparto='Harrison Ford';</code></pre>
-                        <img src="assets/img/PELICULAS HARRISON FORD.PNG" alt="">
+                        
                     </div>
                 </div>
             </div>
@@ -168,14 +160,14 @@
                     <button class="accordion-button collapsed bg-dark text-white" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
                         aria-controls="collapseSix">
-                        6.   Indicar las películas estrenadas entre los años 1990 y 1999 ordenadas por título de manera ascendente.
+                        5. Listar el correo, id y el detalle de todos los comentarios que no hayan sido realizados por
+                        el usuario con email usuario06@hotmail.com.
                     </button>
                 </h2>
                 <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <pre><code>SELECT id,pelicula,ano_estreno FROM peliculas WHERE ano_estreno BETWEEN '1990' AND '1999' ORDER BY ano_estreno ASC;</code></pre>
-                        <img src="assets/img/FILTRO AÑOS 90 A 99.PNG" alt="">
+                       
                     </div>
                 </div>
             </div>
@@ -185,14 +177,13 @@
                     <button class="accordion-button collapsed bg-dark text-white" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false"
                         aria-controls="collapseSeven">
-                        7.   Hacer una consulta SQL que muestre los títulos con su longitud, la longitud debe ser nombrado para la consulta como “longitud_titulo”.
+                        7. Listar todos los post con sus comentarios (incluyendo aquellos que no poseen comentarios).
                     </button>
                 </h2>
                 <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <pre><code>SELECT id,pelicula, LENGTH(pelicula) AS longitud_titulo FROM peliculas;</code></pre>
-                        <img src="assets/img/LONGITUD TITULOS.PNG" alt="">
+                       
                     </div>
                 </div>
             </div>
@@ -202,29 +193,24 @@
                     <button class="accordion-button collapsed bg-dark text-white" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseEigth" aria-expanded="false"
                         aria-controls="collapseEigth">
-                        8.   Consultar cual es la longitud más grande entre todos los títulos de las películas.
+                        8. Listar todos los usuarios que hayan publicado un post en Junio.
                     </button>
                 </h2>
                 <div id="collapseEigth" class="accordion-collapse collapse" aria-labelledby="headingEigth"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <p>Inicialmemnte de busca dentro de los titulos de peliculas el maximo largo.</p>
-                        <pre><code>SELECT MAX(LENGTH(pelicula)) AS longitud_max_titulo FROM peliculas;</code></pre>
-                        <img src="assets/img/MAX LENGTH.PNG" alt="">
-                        <p>Debido a que el solo se mustra el largo y no los datos se utiliza una consulta anidada para mostrar la id-titulo y el largo cuando se cumpla la condicion de que el largo sea igual al maximo largo encontrado.</p>
-                        <pre><code>SELECT id,pelicula, LENGTH(pelicula) AS max_longitud_titulo FROM peliculas WHERE LENGTH(pelicula)=(SELECT MAX(LENGTH(pelicula)) FROM peliculas);</code></pre>
-                        <img src="assets/img/MAX LENGTH ANIDADO.PNG" alt="">
+                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <!-- Comentario -->
     <section class="container pt-5">
-        <h5 class="text-info"><strong>Nota: </strong>pendiente comentar y revisar desde los Items 4 en adelante.</h5>
+        <h5 class="text-info"><strong>Nota: </strong>puntos realizados del 1 al 3.</h5>
     </section>
-    
+
 
 
     <!-- Optional JavaScript; choose one of the two! -->
