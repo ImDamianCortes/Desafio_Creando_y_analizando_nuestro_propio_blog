@@ -133,7 +133,8 @@
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-
+                        <pre><code>SELECT usuario.id, usuario.email, post.id, post.titulo<br>FROM usuario<br>INNER JOIN post<br>ON usuario.id = post.usuario_id AND usuario.id=5;</code></pre>
+                        <img src="assets/img/post_usuario5.PNG" alt="">
                     </div>
                 </div>
             </div>
@@ -150,65 +151,63 @@
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        
-                    </div>
-                </div>
-            </div>
-            <!-- Item 06 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingSix">
-                    <button class="accordion-button collapsed bg-dark text-white" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
-                        aria-controls="collapseSix">
-                        5. Listar el correo, id y el detalle de todos los comentarios que no hayan sido realizados por
-                        el usuario con email usuario06@hotmail.com.
-                    </button>
-                </h2>
-                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                       
-                    </div>
-                </div>
-            </div>
-            <!-- Item 07 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingSeven">
-                    <button class="accordion-button collapsed bg-dark text-white" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false"
-                        aria-controls="collapseSeven">
-                        7. Listar todos los post con sus comentarios (incluyendo aquellos que no poseen comentarios).
-                    </button>
-                </h2>
-                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                       
-                    </div>
-                </div>
-            </div>
-            <!-- Item 08 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingEigth">
-                    <button class="accordion-button collapsed bg-dark text-white" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseEigth" aria-expanded="false"
-                        aria-controls="collapseEigth">
-                        8. Listar todos los usuarios que hayan publicado un post en Junio.
-                    </button>
-                </h2>
-                <div id="collapseEigth" class="accordion-collapse collapse" aria-labelledby="headingEigth"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        
+                        <pre><code>SELECT comentario.usuario_id, usuario.email, comentario.id, comentario.texto<br>FROM usuario<br>INNER JOIN comentario<br>ON usuario.id = comentario.usuario_id<br>WHERE NOT usuario.email='usuario06@hotmail.com';</code></pre>
+                        <img src="assets/img/not_user_6.PNG" alt="">
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Comentario -->
-    <section class="container pt-5">
-        <h5 class="text-info"><strong>Nota: </strong>puntos realizados del 1 al 3.</h5>
+        <!-- Item 06 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    6. Listar los usuarios que no han publicado ningún post.
+                </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <pre><code>SELECT *<br>FROM usuario<br>FULL OUTER JOIN post<br>ON usuario.id=post.usuario_id<br>WHERE post.id is null;</code></pre>
+                        <img src="assets/img/usuarios_sin_post.PNG" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- Item 07 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeven">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                    7. Listar todos los post con sus comentarios (incluyendo aquellos que no poseen comentarios).
+                </button>
+            </h2>
+            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <pre><code>SELECT *<br>FROM post<br>LEFT JOIN comentario<br>ON post.id = comentario.post_id;</code></pre>
+                    <img src="assets/img/item7.PNG" alt="">
+                    <p class="sql-coment">-- tambien se puede ordenar por id post</p>
+                    <img src="assets/img/item71.PNG" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- Item 08 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingEigth">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseEigth" aria-expanded="false" aria-controls="collapseEigth">
+                    8. Listar todos los usuarios que hayan publicado un post en Junio.
+                </button>
+            </h2>
+            <div id="collapseEigth" class="accordion-collapse collapse" aria-labelledby="headingEigth"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <pre><code>SELECT *<br>FROM usuario<br>INNER JOIN post<br>ON usuario.id = post.usuario_id<br>WHERE post.fecha BETWEEN '2020-06-01' AND '2020-06-30';</code></pre>
+                    <img src="assets/img/item8.PNG" alt="">
+                </div>
+            </div>
+        </div>
+        </div>
     </section>
 
 
